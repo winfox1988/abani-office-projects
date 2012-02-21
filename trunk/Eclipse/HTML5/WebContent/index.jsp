@@ -48,7 +48,7 @@
 				document.getElementById('uimg').setAttribute("style","display:none");
 				alert(oXHR.responseText);
 				document.getElementById('image_file').value = "";
-				document.getElementById('result').innerHTML = content + "<br /><a href='download?f=" + oFile.name + "'>" + oFile.name + "</a>" ;
+				document.getElementById('result').innerHTML = content + "<br /><a href='" + oFile.name + "'>" + oFile.name + "</a>" ;
 			}
 		}
 		oXHR.open('POST', 'upload', true);
