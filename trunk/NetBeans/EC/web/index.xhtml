@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+        <p:layout fullPage="true" id="layout">
+            <p:layoutUnit position="north" size="100" minSize="25" maxSize="40">
+                <p:menubar>
+                    <p:menuitem value="Home" url="index.xhtml" /> 
+                    <p:menuitem value="Events" url="event.xhtml" /> 
+                    <p:menuitem value="Members" url="member.xhtml" /> 
+                </p:menubar>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" style="height: 600px;">
+                <p:selectOneRadio id="customRadio" value="#{veg.item}" layout="custom">
+                    <f:selectItem itemLabel="Mushroom Chilli" itemValue="1" />
+                    <f:selectItem itemLabel="Paneer Chilli" itemValue="2" />
+                    <f:selectItem itemLabel="Mushroom Masala" itemValue="3" />
+                    <f:selectItem itemLabel="Paneer Masala" itemValue="4" />
+                </p:selectOneRadio>
+
+                <h:panelGrid columns="2">
+                    <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
+                    <h:outputLabel for="opt1" value="Mushroom Chilli" />
+                    
+                    <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
+                    <h:outputLabel for="opt2" value="Paneer Chilli" />
+                    
+                    <p:radioButton id="opt3" for="customRadio" itemIndex="2"/>
+                    <h:outputLabel for="opt3" value="Mushroom Masala" />
+                    
+                    <p:radioButton id="opt4" for="customRadio" itemIndex="3"/>
+                    <h:outputLabel for="opt4" value="Paneer Masala" />
+                </h:panelGrid>  
+                <p:commandButton id="submitButton" actionListener="#{veg.updateRating(event)}" value="Submit" update="display"/>  
+                <h:panelGrid columns="2" id="display">  
+                    <ui:repeat value="#{veg.ratings}" var="rat">
+                        <h:outputLabel value="#{rat}" />
+                    </ui:repeat> 
+                    <p:pieChart id="sample" value="#{veg.pieModel}" legendPosition="w" title="Sample Pie Chart" style="width:400px;height:300px" />
+                </h:panelGrid>  
+            </p:layoutUnit>
+            <p:layoutUnit position="south" header="&copy; Maintained and Developed by ECo." >
+
+            </p:layoutUnit>
+        </p:layout>
+    </h:form>
+    </h:body>
+</html>
+

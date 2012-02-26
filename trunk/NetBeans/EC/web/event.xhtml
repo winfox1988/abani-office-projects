@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" id="layout">
+            <p:layoutUnit position="north" minSize="20">
+                 <p:menubar >
+                    <p:menuitem value="Home" url="index.xhtml" /> 
+                    <p:menuitem value="Events" url="event.xhtml" /> 
+                    <p:menuitem value="Members" url="member.xhtml" /> 
+                </p:menubar>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" style="height: 600px;">
+                <p:panel header="Events" style="width: 500px;height: 420px;">
+                    <p:schedule value="#{schedule.eventModel}" widgetVar="myschedule">
+                    </p:schedule>
+                </p:panel>    
+            </p:layoutUnit>
+            <p:layoutUnit position="south" header="&copy; Maintained and Developed by ECo." >
+
+            </p:layoutUnit>
+        </p:layout>
+
+    </h:body>
+</html>
+
