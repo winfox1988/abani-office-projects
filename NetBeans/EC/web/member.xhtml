@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" id="layout">
+            <p:layoutUnit position="north" size="100" minSize="25" maxSize="40">
+                <p:menubar>
+                    <p:menuitem value="Home" url="index.xhtml" /> 
+                    <p:menuitem value="Events" url="event.xhtml" /> 
+                    <p:menuitem value="Members" url="member.xhtml" /> 
+                </p:menubar>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" style="height: 600px;">
+                <table >
+                    <tr>
+                        <td >
+                            <p:carousel id="basicCarousel" value="#{carousel.members}" var="member" itemStyleClass="carItem">
+                                <f:facet name="header">
+                                    E. Co. Members
+                                </f:facet>
+                                <h:panelGrid columns="1" style="width:150px;height: 250px;" cellpadding="2">
+                                    <p:graphicImage value="/resources/images/#{member}.png"/>
+                                    <h:outputText value="Name : #{member}" />
+                                </h:panelGrid>
+                            </p:carousel>
+                        </td>
+                    </tr>
+                </table>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" header="&copy; Maintained and Developed by ECo." >
+
+            </p:layoutUnit>
+        </p:layout>
+
+    </h:body>
+</html>
+
