@@ -17,9 +17,9 @@
                 <fieldset>
                     <legend>Login Here</legend>
                     <label for="uid">Username</label>
-                    <input id="uid" name="uid" />
+                    <input id="uid" name="uid" type="text" /><br />
                     <label for="pwd">Password</label>
-                    <input id="pwd" name="pwd" />
+                    <input id="pwd" name="pwd" type="password" />
                     <input type="submit" value="login" />
                 </fieldset>
             </div>
