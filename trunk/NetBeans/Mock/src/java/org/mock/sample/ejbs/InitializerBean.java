@@ -30,6 +30,8 @@ public class InitializerBean {
     
     @PreDestroy
     public void destroy () {
+        // Sys out to verify on TomEE
+        System.out.println("destroying cache");
         LOG.log(Level.INFO, "destroying cache");
     }
 }
