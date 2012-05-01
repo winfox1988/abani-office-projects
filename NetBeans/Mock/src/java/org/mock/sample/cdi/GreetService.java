@@ -4,15 +4,10 @@
  */
 package org.mock.sample.cdi;
 
-import org.mock.sample.annotations.Logged;
-
 /**
  *
- * @author behera
+ * @author abani
  */
-public class GreetService {
-    @Logged
-    public String greetCDI ( final String greeter ) {
-        return "Hallo " + greeter + " from CDI";
-    }
+public interface GreetService {
+    String greetCDI ( final String greeter );
 }
