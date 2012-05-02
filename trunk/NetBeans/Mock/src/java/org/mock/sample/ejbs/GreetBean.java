@@ -26,10 +26,10 @@ public class GreetBean {
    public String greet( final String greeter ){
        return "Hallo " + greeter + " from EJB";
    }
-   @Asynchronous
+   @Asynchronous @Logged
    public void longRunningAction () {
         try {
-            Thread.sleep(2000l);
+            Thread.sleep(5000l);
         } catch (InterruptedException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }

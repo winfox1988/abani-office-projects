@@ -5,12 +5,13 @@
 package org.mock.sample.cdi;
 
 import javax.enterprise.inject.Alternative;
+import org.mock.sample.annotations.ExternalService;
 
 /**
  *
  * @author abani
  */
-@Alternative
+@Alternative @ExternalService
 public class GreetServiceImplExt implements GreetService {
 
     @Override
