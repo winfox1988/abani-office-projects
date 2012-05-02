@@ -15,7 +15,7 @@
         <h1>Hello World!</h1>
         <br />
         <a href="greeter">Check Greet</a><br />
-        <a href="faces/index.xhtml">Check CDI/JSF</a>
+        <a href="faces/cdi-jsf.xhtml">Check CDI/JSF</a>
         <a href="login.jsp">Check Login</a>
     </body>
 </html>
