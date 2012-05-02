@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.mock.sample.annotations.ExternalService;
 import org.mock.sample.cdi.GreetService;
 import org.mock.sample.ejbs.GreetBean;
 
@@ -25,6 +26,7 @@ public class GreeterServlet extends HttpServlet {
 
     @EJB private GreetBean greetBean;
     @Inject private GreetService greetService;
+    @Inject @ExternalService private GreetService greet;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -41,7 +43,8 @@ public class GreeterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String ejbMSG = greetBean.greet("demo");
         String cdiMSG = greetService.greetCDI("demo");
-        //greetBean.longRunningAction();
+        String extCDIMSG = greet.greetCDI("demo");
+        greetBean.longRunningAction();
         try {
             
             out.println("<html>");
@@ -50,7 +53,8 @@ public class GreeterServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h4>Servlet ejbMSG " + ejbMSG + "</h4>");
-            out.println("<h4>Servlet ejbMSG " + cdiMSG + "</h4>");
+            out.println("<h4>Servlet cdiMSG " + cdiMSG + "</h4>");
+            out.println("<h4>Servlet extCDIMSG " + extCDIMSG + "</h4>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
