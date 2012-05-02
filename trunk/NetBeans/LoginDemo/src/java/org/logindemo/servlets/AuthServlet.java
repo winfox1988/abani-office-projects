@@ -52,7 +52,7 @@ public class AuthServlet extends HttpServlet {
            
         } catch(Exception e){
             request.setAttribute("msg", "Unable to login with <b> " + username + "</b>");
-            rd = request.getRequestDispatcher("login.jsp");
+            rd = request.getRequestDispatcher("index.jsp");
         }
         rd.forward(request, response);
     }
