@@ -18,6 +18,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @LocalBean
+@Asynchronous
 public class ServicesBean {
 
     private static final Logger LOG = Logger.getLogger(ServicesBean.class.getName());
