@@ -25,8 +25,7 @@ import org.mock.sample.ejbs.ServicesBean;
 @WebServlet(name = "VerifierServlet", urlPatterns = {"/async", "/sync"})
 public class VerifierServlet extends HttpServlet {
 
-    @EJB
-    private ServicesBean servicesBean;
+    @EJB private ServicesBean servicesBean;
 
     /**
      * Processes requests for both HTTP
