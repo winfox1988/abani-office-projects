@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="logo.ico" type="image/x-icon" />
 <title>Chat App</title>
 </head>
 <body>
 	Server-Push page powered by WebSocket
 	<div>
 		<button id="conB" onclick="connect(this)">Connect</button>
-		<button onclick="sendMsg()">Send</button>
+		<button id="sndB" disabled="disabled" onclick="sendMsg()">Send Message</button>
 		<button id="clsB" disabled="disabled" onclick="closeWS(this)">Close</button>
 	</div>
 	<div>
@@ -25,6 +26,7 @@
 	connect = function(obj){
 		obj.disabled = true;
 		document.getElementById('clsB').disabled = false;
+		document.getElementById('sndB').disabled = false;
 		ws = new WebSocket(host);
 		ws.onmessage = function (event) {
 			document.getElementById('msg').innerHTML = document.getElementById('msg').innerHTML + '<br />' + event.data;
@@ -35,6 +37,7 @@
 	};
 	closeWS = function(obj) {
 		obj.disabled = true;
+		document.getElementById('sndB').disabled = true;
 		alert('connection closed');
 		document.getElementById('conB').disabled = false;
 		ws.close();
