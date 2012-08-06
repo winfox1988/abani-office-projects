@@ -55,10 +55,5 @@ public class ChatSocket extends WebSocketServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
-	
-	
-
 }
