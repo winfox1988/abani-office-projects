@@ -8,7 +8,7 @@
 <title>Chat App</title>	
 </head>
 <body>
-	Server-Push page powered by WebSocket
+	Server-Push demo powered by WebSocket
 	<div>
 		<label for="mText">Enter Message </label>
 		<input type="text" disabled="disabled" id="mText" />
