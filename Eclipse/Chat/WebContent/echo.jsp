@@ -27,39 +27,36 @@
 	var host = "ws://localhost:8080/Chat/echo";
 	connect = function(obj){
 		obj.disabled = true;
-		document.getElementById('clsB').disabled = false;
-		document.getElementById('mText').disabled = false;
-		document.getElementById('sndB').disabled = false;
+		byId('clsB').disabled = false;
+		byId('mText').disabled = false;
+		byId('sndB').disabled = false;
 		ws = new WebSocket(host);
 		ws.onopen = function () {
 			alert ('connected');
 		};
 		ws.onmessage = function (event) {
-			document.getElementById('msg').innerHTML = document.getElementById('msg').innerHTML + '<br />' + event.data;
+			byId('msg').innerHTML = byId('msg').innerHTML + '<br />' + event.data;
 		};
 	};
 	sendMsg = function() {
-		var msg = document.getElementById('mText').value;
+		var msg = byId('mText').value;
 		if (msg.isEmpty()){
 			alert("Please enter some message");
 		}else{
 			ws.send(msg);	
-			document.getElementById('mText').value = "";
+			byId('mText').value = "";
 		}
 	};
 	closeWS = function(obj) {
+		byId('msg').innerHTML = '';
 		obj.disabled = true;
-		document.getElementById('sndB').disabled = true;
-		document.getElementById('conB').disabled = false;
-		document.getElementById('mText').disabled = true;
+		byId('sndB').disabled = true;
+		byId('conB').disabled = false;
+		byId('mText').disabled = true;
 		ws.close();
 	};
 	String.prototype.isEmpty = function(){
-		var bIsEmpty = false;
-		if (this.length == 0){
-			bIsEmpty = true;
-		}
-		return bIsEmpty;
+		return this.length == 0;
 	};
 	generateMsg = function(){
 		var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
@@ -70,6 +67,9 @@
 			randomstring += chars.substring(rnum,rnum+1);
 		}
 		return randomstring;
+	};
+	byId = function(objId){
+		return document.getElementById(objId);
 	};
 </script>
 </html>
