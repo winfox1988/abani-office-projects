@@ -19,12 +19,27 @@ public class ChatSocket extends WebSocketServlet {
 	private final Set<ChatSocketWebSocket> members = new CopyOnWriteArraySet<ChatSocketWebSocket>();
 	
 	@Override
-	public WebSocket doWebSocketConnect(HttpServletRequest arg0, String arg1) {
-		return new ChatSocketWebSocket();
+	public WebSocket doWebSocketConnect(HttpServletRequest request, String arg1) {
+		String user = request.getParameter("userName");
+		return new ChatSocketWebSocket(user);
 	}
 
 	class ChatSocketWebSocket implements WebSocket.OnTextMessage {
 		private Connection conn;
+		private String user;
+		
+		public ChatSocketWebSocket(String user) {
+			this.user = user;
+		}
+
+		public String getUser() {
+			return user;
+		}
+
+		public void setUser(String user) {
+			this.user = user;
+		}
+
 		@Override
 		public void onClose(int arg0, String closeMsg) {
 			System.out.println("ChatSocket.ChatSocketWebSocket.onClose() " + closeMsg);
@@ -42,7 +57,7 @@ public class ChatSocket extends WebSocketServlet {
 		public void onMessage(String arg0) {
 			System.out.println("ChatSocket.ChatSocketWebSocket.onMessage() " + arg0);
 			for (ChatSocketWebSocket member : members) {
-					sendMessage(member.conn, "From Server " + arg0);
+					sendMessage(member.conn, this.user + " : " + arg0);
 			}
 		}
 		

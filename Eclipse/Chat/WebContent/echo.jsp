@@ -32,10 +32,13 @@
 		byId('sndB').disabled = false;
 		ws = new WebSocket(host);
 		ws.onopen = function () {
-			alert ('connected');
+			alert ('connected to server');
 		};
 		ws.onmessage = function (event) {
 			byId('msg').innerHTML = byId('msg').innerHTML + '<br />' + event.data;
+		};
+		ws.onclose = function (event){
+			alert ('disconnected from server');
 		};
 	};
 	sendMsg = function() {
@@ -57,16 +60,6 @@
 	};
 	String.prototype.isEmpty = function(){
 		return this.length == 0;
-	};
-	generateMsg = function(){
-		var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-		var string_length = 8;
-		var randomstring = '';
-		for (var i=0; i<string_length; i++) {
-			var rnum = Math.floor(Math.random() * chars.length);
-			randomstring += chars.substring(rnum,rnum+1);
-		}
-		return randomstring;
 	};
 	byId = function(objId){
 		return document.getElementById(objId);

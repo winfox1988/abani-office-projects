@@ -5,17 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="shortcut icon" href="logo.ico" type="image/x-icon" />
-<title>Chat App</title>
+<title>Chat App</title>	
 </head>
 <body>
-	Server-Push page powered by WebSocket
+	Chat demo powered by WebSocket
 	<div>
-		<button id="conB" onclick="connect(this)">Connect</button>
+		<label id="lblText" for="mText">Enter Name</label>
+		<input type="text" id="mText" />
+		<button id="conB" onclick="connect(this)">Connect</button><br/>
+		<label id="lblStatus" for="sStatus">Server Status : </label>
+		<span id="sStatus" style="color:red">Not Connected to Server</span><br />
 		<button id="sndB" disabled="disabled" onclick="sendMsg()">Send Message</button>
-		<button id="clsB" disabled="disabled" onclick="closeWS(this)">Close</button>
+		<button id="clsB" disabled="disabled" onclick="closeWS(this)">Disconnect</button>
 	</div>
 	<div>
-		<label for="msg">Server Message : </label>
+		<label for="msg"><b>Chat Messages : </b></label>
+		<hr width="300px;" align="left"/>
 		<span id="msg"></span>
 	</div>
 	
@@ -24,33 +29,53 @@
 	var ws;
 	var host = "ws://localhost:8080/Chat/wschat";
 	connect = function(obj){
-		obj.disabled = true;
-		document.getElementById('clsB').disabled = false;
-		document.getElementById('sndB').disabled = false;
-		ws = new WebSocket(host);
-		ws.onmessage = function (event) {
-			document.getElementById('msg').innerHTML = document.getElementById('msg').innerHTML + '<br />' + event.data;
-		};
+		var user = byId('mText').value;
+		if(user.isEmpty()){
+			alert('Enter a name to join the chat room');
+		}else{
+			byId('mText').value = "";
+			obj.disabled = true;
+			byId('lblText').innerHTML='Enter Message';
+			byId('clsB').disabled = false;
+			byId('sndB').disabled = false;
+			ws = new WebSocket(host+'?userName='+user);
+			ws.onopen = function () {
+				//alert ('connected to server');
+				byId('sStatus').style.color = 'green';
+				byId('sStatus').innerHTML = 'Connected to Server';
+			};
+			ws.onmessage = function (event) {
+				byId('msg').innerHTML = byId('msg').innerHTML + '<br />' + event.data;
+			};
+			ws.onclose = function (event){
+				//alert ('disconnected from server');
+				byId('sStatus').style.color = 'red';
+				byId('sStatus').innerHTML = 'Not Connected to Server';
+			};
+		}
 	};
 	sendMsg = function() {
-		ws.send(generateMsg());
+		var msg = byId('mText').value;
+		if (msg.isEmpty()){
+			alert("Please enter some message");
+		}else{
+			ws.send(msg);	
+			byId('mText').value = "";
+		}
 	};
 	closeWS = function(obj) {
+		byId('msg').innerHTML = '';
+		byId('lblText').innerHTML='Enter Name';
 		obj.disabled = true;
-		document.getElementById('sndB').disabled = true;
-		alert('connection closed');
-		document.getElementById('conB').disabled = false;
+		byId('sndB').disabled = true;
+		byId('conB').disabled = false;
 		ws.close();
 	};
-	generateMsg = function(){
-		var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-		var string_length = 8;
-		var randomstring = '';
-		for (var i=0; i<string_length; i++) {
-			var rnum = Math.floor(Math.random() * chars.length);
-			randomstring += chars.substring(rnum,rnum+1);
-		}
-		return randomstring;
+	String.prototype.isEmpty = function(){
+		return this.length == 0;
+	};
+	byId = function(objId){
+		return document.getElementById(objId);
 	};
 </script>
 </html>
