@@ -43,6 +43,9 @@ public class ChatSocket extends WebSocketServlet {
 		@Override
 		public void onClose(int arg0, String closeMsg) {
 			System.out.println("ChatSocket.ChatSocketWebSocket.onClose() " + closeMsg);
+			for (ChatSocketWebSocket member : members) {
+				sendMessage(member.conn, "User "+ user + " leaving the chat");
+			}
 			this.conn.close();
 		}
 
@@ -51,6 +54,9 @@ public class ChatSocket extends WebSocketServlet {
 			System.out.println("connected " + conn.hashCode());
 			members.add(this);
 			this.conn = conn;
+			for (ChatSocketWebSocket member : members) {
+				sendMessage(member.conn, "User "+ user + " joined the chat");
+			}
 		}
 
 		@Override
